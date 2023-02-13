@@ -60,20 +60,29 @@ program(comp_list)
 
 
 #3. Напишіть користувацький клас виключення з функціоналом на свій вибір. Викличте його за допомогою raise.
-class MyError(Exception):
-    def __init__(self, sentence, sentence2):
-        self.sentence = sentence
-        self.sentence2 = sentence2
+class GameRates(Exception):
+    def __init__(self, rate, minrate, maxrate):
+        self.rate = rate
+        self.minrate = minrate
+        self.maxrate = maxrate
 
-number = input('Введіть позитивне число: ')
-try:
-    number = int(number)
-    if number < 0:
-        raise MyError('Ви ввели число меньше 0!', number)
-except ValueError as error1:
-    print(f'{error1}')
-except MyError as mr:
-    print(mr)
+    def __str__(self):
+        return f'Unacceptable rate {self.rate} for game. \
+Rate should be from {self.minrate} to {self.maxrate}'
 
-else:
-    print(number)
+class Game:
+    def __init__(self, name, rate):
+        self.name = name
+        minrate = 1
+        maxrate = 10
+        if minrate < rate < maxrate:
+            self.rate = rate
+        else:
+            raise GameRates(rate, minrate, maxrate)
+
+    def display(self):
+        print(f'Game: {self.name}, rate: {self.rate} ')
+
+
+new_game = Game(input('Input game '), int(input('Input rate ')))
+new_game.display()
