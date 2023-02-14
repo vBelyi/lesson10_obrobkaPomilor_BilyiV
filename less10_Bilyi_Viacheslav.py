@@ -1,30 +1,29 @@
 #1. Напишіть функцію, яка б приймала номер місяця, а вертала його назву.
 def monthes(month):
-    list_month = ['Winter','Spring', 'Summer','Autumn']
-    if month in (1, 2, 12):
-        try:
-            return Winter
-        except NameError as error:
-            print(f'ERROR: {error}')
-        finally:
-            return 'Winter'
-    elif month in (3, 4, 5):
-        return 'Spring'
-    elif month in (6, 7, 8):
-        return 'Summer'
-    elif month in (9, 10, 11):
-        try:
-            return list_month[4]
-        except IndexError as error3:
-            print(f'ERROR3: {error3}')
-        finally:
-            return 'Autumn'
+    list_of_month = {
+        1: "January",
+        2: "February",
+        3: "March",
+        4: "April",
+        5: "May",
+        6: "June",
+        7: "July",
+        8: "August",
+        9: "September",
+        10: "October",
+        11: "November",
+        12: "December"
+    }
+    try:
+        return list_of_month[month]
+    except KeyError:
+         return 'KeyError: try again and print number from 1 to 12'
 
 try:
-    print(monthes(int(input('Click here to input a number of month to know a time of the year: '))))
+    month_name = monthes(int(input('Input number of month: ')))
+    print(month_name)
 except ValueError as error2:
-    print(f'ERROR2: {error2}')
-    print('Please try again and print integer')
+    print('ValueError: try again and print number from 1 to 12')
 
 #2. Напишіть програму яка б приймала список з числами та перевіряла чи всі числа в ньому унікальні. Реалізуйте з виключаннями.
 def program(list_of_strings):
