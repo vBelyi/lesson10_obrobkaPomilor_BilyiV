@@ -67,7 +67,7 @@ class GameRates(Exception):
 
     def __str__(self):
         return f'ERROR:Unacceptable rate {self.rate} for game. \
-Rate should be from {self.minrate} to {self.maxrate}'
+Rate should be from 1 to 10'
 
 class Game:
     def __init__(self, name, rate):
