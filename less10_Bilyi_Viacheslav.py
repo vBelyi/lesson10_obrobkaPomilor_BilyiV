@@ -66,22 +66,25 @@ class GameRates(Exception):
         self.maxrate = maxrate
 
     def __str__(self):
-        return f'Unacceptable rate {self.rate} for game. \
+        return f'ERROR:Unacceptable rate {self.rate} for game. \
 Rate should be from {self.minrate} to {self.maxrate}'
 
 class Game:
     def __init__(self, name, rate):
         self.name = name
-        minrate = 1
-        maxrate = 10
+        self.rate = rate
+        minrate = 0
+        maxrate = 11
         if minrate < rate < maxrate:
             self.rate = rate
+            print(f'Game: {self.name}, rate: {self.rate} ')
         else:
-            raise GameRates(rate, minrate, maxrate)
+            try:
+                raise GameRates(rate, minrate, maxrate)
+            except Exception as error2:
+                print(f'{error2}')
 
-    def display(self):
-        print(f'Game: {self.name}, rate: {self.rate} ')
-
-
-new_game = Game(input('Input game '), int(input('Input rate ')))
-new_game.display()
+try:
+    new_game = Game(input('Input game '), int(input('Input rate ')))
+except ValueError as error:
+    print(f'{error}', ': please input rate as integer from 1 to 10')
